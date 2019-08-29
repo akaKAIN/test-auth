@@ -25,7 +25,9 @@ SECRET_KEY = '*vd3f+11&w1qvo3r)06n4r21nwpm&2xvos7dgbko2u$4alf++2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
+AUTH_USER_MODEL = 'accounts.Account'
 
 
 # Application definition
@@ -37,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -54,8 +57,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': ['./templates', ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
