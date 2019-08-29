@@ -29,6 +29,8 @@ ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL = 'accounts.Account'
 
+LOGIN_REDIRECT_URL = '/'
+
 
 # Application definition
 
