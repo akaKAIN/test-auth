@@ -3,5 +3,32 @@
 {% block title %} test {% endblock title %}
 
 {% block content %}
-    <h2>TESTING</h2>
+    <div style="width: 30%; height: 50%; margin: auto; margin-top: 5%">
+        {% if user.is_authenticated %}
+            {{ user.username }}
+            <a class="button" href="{% url 'logout' %}">Выйти</a>
+            <a class="button" href="#">Отправить сообщение</a>
+        {% else %}
+            <form>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                           placeholder="Enter email">
+                </div>
+                <div class="form-group mt-5">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1"
+                           placeholder="Enter your password">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        {% endif %}
+    </div>
+
+
+
+
+
+
 {% endblock content %}

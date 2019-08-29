@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% include 'includes/ccs_bootstrap.html' %}
     <meta charset="UTF-8">
     <title>
         {% block title %}AJAX{% endblock title %}
@@ -10,5 +11,7 @@
 {% block content %}
     NONE CONTENT
 {% endblock content %}
+
+{% include 'includes/js_bootstrap.html' %}
 </body>
 </html>
