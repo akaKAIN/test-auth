@@ -3,27 +3,20 @@
 {% block title %} test {% endblock title %}
 
 {% block content %}
-    {{ message }}
-{#    <div class="form_block">#}
-{#        <form class="field_field" action="{% url 'auth:login' %}" method="post" style="margin: 50px">#}
-{#            {% csrf_token %}#}
-{#            {{ form.as_p }}#}
-{##}
-{#            <input type="hidden" name="next" value="{{ next }}">#}
-{#            <input class="field_button" type="submit" value="{% trans 'Войти' %}">#}
-{#            <a href="{% url 'auth:register' %}" class="">{% trans 'Зарегистрироваться' %}</a>#}
-{#        </form>#}
+    <div style="text-align: center">
+        {% include 'includes/messages.html' %}
+    </div>
 
-        <form action="{% url 'accounts:login' %}" method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
+    {% if next %}
+        <p>Авторизуйтесь, чтобы отправить сообщение</p>
+    {% endif %}
 
-            <button type="submit" class="btn btn-primary">Войти</button>
+    <form action="{% url 'accounts:login' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-secondary">Войти</button>
+    </form>
 
-
-        </form>
-
-    <a href="#" class="">Зарегистрироваться</a>
-
+    <a href="{% url 'accounts:reg' %}" class="">Зарегистрироваться</a>
 
 {% endblock content %}

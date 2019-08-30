@@ -1,5 +1,56 @@
-{% extends 'base.html' %}
+{% extends 'accounts/index.html' %}
 
-{% block title %}Регистрация{% endblock title %}
+{% block ajax %}
+    <script>
+        console.log('start');
+        $(document).ready(function () {
+            $('#id_email').on('blur', check);
 
-{% block content %} reg-content {% endblock content%}
+            function check() {
+                let email = $('#id_email').val();
+                $.ajax({
+                    method: 'POST',
+                    url: '/validate-email/',
+                    data: {
+                        'email': email,
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log(data);
+                        if (data.is_taken) {
+                            $('#error-email').text(data.is_taken);
+                            $('#button_reg').attr('disabled', 'disabled');
+                        } else if (data.ok) {
+                            $('#error-mail').text('');
+                            $('#button_reg').removeAttr('disabled');
+                        }
+                    },
+                    error: function (data) {
+                        console.log(data);
+                    }
+                })
+            }
+        })
+    </script>
+{% endblock ajax %}
+
+
+
+{% block registration %}
+    <form action="{% url 'accounts:reg' %}" method="post">{% csrf_token %}
+
+        {% for field in form %}
+            <div class="form-group">
+                <label for=''>{{ field.label }}</label>
+                <div>{{ field }}</div>
+                {% if field.errors %}
+                    <p>{{ field.errors }}</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <p id='error-mail'></p>
+        <button class="btn btn-secondary" id='button_reg' type="submit">Регистрация</button>
+    </form>
+
+{% endblock registration %}

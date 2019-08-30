@@ -1,26 +1,26 @@
 {% extends 'base.html' %}
 
-{% block title %} main-view {% endblock title %}
+
+{% block ajax_script %}{% endblock ajax_script %}
+{% block title %}index{% endblock title %}
 
 {% block content %}
 
-    <form>
-        <label>Найти
-            <input type="text" name="search" method="POST">
-        </label>
-        <input type="submit" value="sech">
-    </form>
-
-
-
-
     <div style="display: flex; justify-content: space-evenly;">
-        <form>
-            <button type="button" class="btn btn-secondary">Отправить сообщение</button>
-        </form>
-        <form>
-            <button formaction="{% url 'accounts:logout' %}" type="submit" class="btn btn-secondary">Выйти</button>
-        </form>
+        {% if user.is_authenticated %}
+            <form>
+                <button type="button" class="btn btn-secondary">Отправить</button>
+            </form>
+
+            <form>
+                <button formaction="{% url 'accounts:logout' %}" type="submit" class="btn btn-secondary">Выйти</button>
+            </form>
+        {% endif %}
     </div>
+    {% for man in users %} <p>{{ man.pk }}. {{ man.username }}</p> {% endfor %}
+
+    {% block registration %} {% endblock registration %}
 
 {% endblock content %}
+
+
