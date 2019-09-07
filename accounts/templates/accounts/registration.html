@@ -1,38 +1,5 @@
 {% extends 'accounts/index.html' %}
 
-{% block ajax %}
-    <script>
-        console.log('start');
-        $(document).ready(function () {
-            $('#id_email').on('blur', check);
-
-            function check() {
-                let email = $('#id_email').val();
-                $.ajax({
-                    method: 'POST',
-                    url: '/validate-email/',
-                    data: {
-                        'email': email,
-                    },
-                    dataType: 'json',
-                    success: function (data) {
-                        console.log(data);
-                        if (data.is_taken) {
-                            $('#error-email').text(data.is_taken);
-                            $('#button_reg').attr('disabled', 'disabled');
-                        } else if (data.ok) {
-                            $('#error-mail').text('');
-                            $('#button_reg').removeAttr('disabled');
-                        }
-                    },
-                    error: function (data) {
-                        console.log(data);
-                    }
-                })
-            }
-        })
-    </script>
-{% endblock ajax %}
 
 
 
@@ -52,5 +19,8 @@
         <p id='error-mail'></p>
         <button class="btn btn-secondary" id='button_reg' type="submit">Регистрация</button>
     </form>
+    <p class="error" id="error_name"></p>
+    <p class="error" id="error_email"></p>
+    <p class="error" id="error_password"></p>
 
 {% endblock registration %}

@@ -1,7 +1,106 @@
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+
+
+{#<script>#}
+{#    $(document).ready(function () {#}
+{#        $("#btn_off").click(function () {#}
+{#            $("#texting").hide();#}
+{#        });#}
+{##}
+{#        $("#btn_on").click(function () {#}
+{#            $("#texting").show();#}
+{#        })#}
+{#    });#}
+{##}
+{##}
+{#    console.log('start');#}
+{#    $(document).ready(function () {#}
+{#        $('#id_email').on('blur', check);#}
+{##}
+{#        function check() {#}
+{#            let email = $('#id_email').val();#}
+{#            $.ajax({#}
+{#                method: 'GET',#}
+{#                url: '{% url 'validate:email' %}',#}
+{#                data: {#}
+{#                    'email': email,#}
+{#                },#}
+{#                dataType: 'json',#}
+{#                success: function (data) {#}
+{#                    console.log(data);#}
+{#                    if (data.is_taken) {#}
+{#                        $('#error-email').text(data.is_taken);#}
+{#                        $('#button_reg').attr('disabled', 'disabled');#}
+{#                    } else if (data.ok) {#}
+{#                        $('#error-mail').text('');#}
+{#                        $('#button_reg').removeAttr('disabled');#}
+{#                    }#}
+{#                },#}
+{#                error: function (data) {#}
+{#                    console.log(data);#}
+{#                }#}
+{#            })#}
+{#        }#}
+{#    })#}
+{#</script>#}
+
+
+<script>
+    $(document).ready(function () {
+        $('#id_username').on('blur', check_name);
+        $('#id_email').on('blur', check_email);
+
+        function check_email() {
+            const email = $('#id_email').val();
+            const url = '{% url 'validate:email' %}';
+
+
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: {"email": email, csrfmiddlewaretoken: '{{ csrf_token }}'},
+                dataType: 'json',
+                success: function (data) {
+                    if (data.error) {
+                        $('#error_email').text(data.error).css('color', 'red');
+                        $('#id_email').css('background-color', 'pink')
+                    }else if (data.answer){
+                        $('#error_email').text(data.answer).css('color', 'white');
+                        $('#id_email').css('background-color', 'white');
+                    }
+
+                }
+            })
+        }
+
+        function check_name() {
+            const name = $('#id_username').val();
+            const url = '{% url 'validate:name' %}';
+
+            $.ajax({
+                type: 'GET',
+                url: url,
+                data: {"name": name},
+                dataType: 'json',
+                success: function (data) {
+                    if (data.error) {
+                        $('#error_name').text(data.error).css('color', 'red');
+                         $('#id_username').css('background-color', 'pink')
+                    }else if (data.answer){
+                        $('#error_name').text(data.answer).css('color', 'white');
+                        $('#id_username').css('background-color', 'white')
+                    }
+
+                }
+            })
+        }
+    })
+
+</script>

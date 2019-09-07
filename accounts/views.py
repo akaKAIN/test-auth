@@ -2,8 +2,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.messages.views import SuccessMessageMixin
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
+from django.urls import reverse
 from django.views.generic import TemplateView, FormView
 
 from accounts.forms import UserCreateForm
@@ -45,14 +46,15 @@ class UserRegisterFormView(FormView):
         return super(UserRegisterFormView, self).form_invalid(form)
 
 
-def validate_email(request):
-    if request.method == 'POST':
-        data = {}
-        email = request.POST.get('email')
-        is_taken = User.objects.filter(email=email).exists()
-        if request.is_ajax():
-            if is_taken:
-                data = {'is_taken': 'Пользователь с такой почтой уже существует'}
-            else:
-                data = {'ok': 'Почтовый ящик свободен'}
-        return JsonResponse(data)
+# def validate_email(request):
+#     if request.method == 'POST':
+#         data = {}
+#         email = request.POST.get('email')
+#         is_taken = User.objects.filter(email=email).exists()
+#         if request.is_ajax():
+#             if is_taken:
+#                 data = {'is_taken': 'Пользователь с такой почтой уже существует'}
+#             else:
+#                 data = {'ok': 'Почтовый ящик свободен'}
+#         return JsonResponse(data)
+

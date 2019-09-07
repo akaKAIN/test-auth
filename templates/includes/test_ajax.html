@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>
+        ------
+    </title>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+</head>
+<body>
+
+<div style="width: 25%; height: 60%; margin: auto; margin-top: 5%; background-color: lightseagreen; padding: 50px">
+    <div style="text-align: center">
+
+
+        <form action="#" method="GET">
+            <label for="id_name">Имя</label><input type="text" id="id_name">
+            <input type="button" value="Отправить">
+        </form>
+
+        <h1>{{ answer }}</h1>
+        <h2 id="h2">.</h2>
+    </div>
+
+</div>
+
+<form action="{% url 'accounts:test_check' %}" method="GET">
+    <label>TEXT
+        <input type="text" id="field_value">
+    </label>
+    <input type="submit" value="fuck">
+</form>
+
+<a id="url" href="{% url 'validate:email' %}">awdawdawdwa</a>
+
+</body>
+<script>
+
+
+    $(document).ready(function () {
+        $('#id_name').on('blur', check);
+
+        function check() {
+            const name = $('#id_name').val();
+            const url = $('#url').attr('href');
+
+            $.ajax({
+                type: 'GET',
+                url: '{% url 'validate:email' %}',
+                data: {"email": name},
+                dataType: 'json',
+                success: function (data) {
+                    $('#h2').text(data.answer)
+                }
+            })
+        }
+    })
+
+
+</script>
+</html>
