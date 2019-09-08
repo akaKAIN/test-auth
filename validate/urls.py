@@ -1,5 +1,4 @@
 from django.urls import path
-
 from validate.views import validate_email, validate_name
 
 app_name = 'validate'

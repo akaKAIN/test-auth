@@ -1,42 +1,46 @@
+"""Вьюхи просмотра страницы отправки сообщений, логина, логаута, регистрации"""
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.messages.views import SuccessMessageMixin
-from django.http import JsonResponse, HttpResponse
-from django.shortcuts import render
-from django.urls import reverse
-from django.views.generic import TemplateView, FormView
 
-from accounts.forms import UserCreateForm
+from django.urls import reverse_lazy
+from django.views.generic import TemplateView, FormView, CreateView
+
+from accounts.forms import UserCreateForm, MessageForm
+from accounts.models import Message
+
+
+class AbstractMessage:
+    """Акстрактный класс хранящий общие параметры для остальных вью с этой моделью"""
+    model = Message
+    login_url = 'accounts:login'
+    paginate_by = 20
+    # template_name = 'accounts/registrations.html'
 
 
 class MainView(LoginRequiredMixin, TemplateView):
+    """Класс-вью страницы отправки сообщений. Для авторизованных пользователей."""
     template_name = 'accounts/index.html'
     login_url = 'accounts:login'
 
-    def get(self, request, *args):
-        context = {}
-        if request.user.is_authenticated:
-            users = User.objects.all()
-            context.update({
-                'users': users,
-            })
-        return render(request, self.template_name, context)
-
 
 class UserLogin(SuccessMessageMixin, LoginView):
+    """Класс-вью для авторизации пользователя"""
     success_message = 'Пользователь %(username)s -авторизован.'
     redirect_authenticated_user = True
 
 
 class UserLogout(LoginRequiredMixin, LogoutView):
+    """Класс-вью для 'логаута' пользователя"""
     next_page = 'accounts:main'
 
 
-class UserRegisterFormView(FormView):
+class UserRegisterFormView(SuccessMessageMixin, FormView):
+    """Класс-вью для регистрации пользователя"""
     form_class = UserCreateForm
-    success_url = '/'
+    success_url = reverse_lazy('accounts:main')
     template_name = 'accounts/registration.html'
+    success_message = 'Пользователь %(username)s - успешно зарегистрирован.'
 
     def form_valid(self, form):
         form.save()
@@ -46,15 +50,9 @@ class UserRegisterFormView(FormView):
         return super(UserRegisterFormView, self).form_invalid(form)
 
 
-# def validate_email(request):
-#     if request.method == 'POST':
-#         data = {}
-#         email = request.POST.get('email')
-#         is_taken = User.objects.filter(email=email).exists()
-#         if request.is_ajax():
-#             if is_taken:
-#                 data = {'is_taken': 'Пользователь с такой почтой уже существует'}
-#             else:
-#                 data = {'ok': 'Почтовый ящик свободен'}
-#         return JsonResponse(data)
-
+class MessageCreate(LoginRequiredMixin, SuccessMessageMixin, AbstractMessage, CreateView):
+    """Класс-вью создания/отправки сообщения пользователя администратору"""
+    form_class = MessageForm
+    success_message = 'Ваше письмо отправлено администратору'
+    success_url = reverse_lazy('accounts:main')
+    template_name = 'accounts/message_form.html'

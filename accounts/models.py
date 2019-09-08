@@ -1,21 +1,36 @@
-# from django.contrib.auth.models import AbstractUser
-# from django.core.mail import send_mail, EmailMessage
-# from django.db import models
-#
-#
-# class MainClass(models.Model):
-#     """Базовая модель, собержащая общие атрибуты и методы"""
-#     def delete(self, *args, **kwargs):
-#         self.is_active = False
-#         self.save()
-#
-#
-# class Account(AbstractUser, MainClass):
-#     """Модель учетной записи пользователей"""
-#     def str(self):
-#         return f'{self.first_name} {self.last_name}'
-#
-#     class Meta:
-#         verbose_name = 'Учетную запись пользователя'
-#         verbose_name_plural = 'Учетные записи пользователей'
-#
+from django.contrib.auth.models import User
+from django.core.mail import send_mail, EmailMessage
+from django.db import models
+
+
+class MainClass(models.Model):
+    """Базовая модель, собержащая общие атрибуты и методы"""
+    def delete(self, *args, **kwargs):
+        self.is_active = False
+        self.save()
+
+
+class Message(MainClass):
+    """Модель сообщения, отправляемого пользователями в адрес 'админа'"""
+    mail_from = models.EmailField(
+        verbose_name='Отправитель/От кого',
+    )
+    mail_to = models.EmailField(
+        verbose_name='Получатель/Кому',
+        default='admin@site.ru',
+        blank=True,
+    )
+    note = models.TextField(verbose_name='Текст сообщения')
+    is_read = models.BooleanField(verbose_name='Прочитано', default=False, blank=True)
+    mail_date = models.DateTimeField(verbose_name='Дата создания письма', auto_now_add=True)
+
+    # def clean_note(self):
+    #     data = self.note
+    #     print(data)
+    #     data += 'wadwdwadwa'
+    #     return data
+
+    class Meta:
+        verbose_name = 'Сообщение'
+        verbose_name_plural = 'Сообщения пользоватлеей'
+        ordering = ('-mail_date', 'mail_from')
