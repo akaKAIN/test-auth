@@ -1,0 +1,70 @@
+************* Module accounts.apps
+apps.py:1:0: C0111: Missing module docstring (missing-docstring)
+************* Module accounts.forms
+forms.py:41:0: C0301: Line too long (106/100) (line-too-long)
+forms.py:14:4: C0111: Missing class docstring (missing-docstring)
+forms.py:14:4: R0903: Too few public methods (0/2) (too-few-public-methods)
+forms.py:29:4: C0111: Missing class docstring (missing-docstring)
+forms.py:29:4: R0903: Too few public methods (0/2) (too-few-public-methods)
+forms.py:6:0: C0411: third party import "import requests" should be placed before "from accounts.models import Message" (wrong-import-order)
+forms.py:7:0: C0411: standard import "import json" should be placed before "from django.contrib.auth.forms import UserCreationForm" (wrong-import-order)
+************* Module accounts.models
+models.py:1:0: C0111: Missing module docstring (missing-docstring)
+models.py:8:4: W0221: Parameters differ from overridden 'delete' method (arguments-differ)
+models.py:8:0: W0613: Unused argument 'args' (unused-argument)
+models.py:8:0: W0613: Unused argument 'kwargs' (unused-argument)
+models.py:9:8: W0201: Attribute 'is_active' defined outside __init__ (attribute-defined-outside-init)
+models.py:27:4: C0111: Missing class docstring (missing-docstring)
+models.py:27:4: R0903: Too few public methods (0/2) (too-few-public-methods)
+models.py:1:0: W0611: Unused User imported from django.contrib.auth.models (unused-import)
+************* Module accounts.views
+views.py:12:0: R0903: Too few public methods (0/2) (too-few-public-methods)
+views.py:24:0: R0901: Too many ancestors (11/7) (too-many-ancestors)
+views.py:30:0: R0901: Too many ancestors (9/7) (too-many-ancestors)
+views.py:35:0: R0901: Too many ancestors (9/7) (too-many-ancestors)
+views.py:46:4: W0235: Useless super delegation in method 'form_invalid' (useless-super-delegation)
+views.py:50:0: R0901: Too many ancestors (15/7) (too-many-ancestors)
+************* Module accounts.urls
+urls.py:1:0: C0111: Missing module docstring (missing-docstring)
+urls.py:4:0: C0103: Constant name "app_name" doesn't conform to UPPER_CASE naming style (invalid-name)
+urls.py:6:0: C0103: Constant name "urlpatterns" doesn't conform to UPPER_CASE naming style (invalid-name)
+************* Module accounts.migrations.0001_initial
+migrations/0001_initial.py:18:0: C0301: Line too long (114/100) (line-too-long)
+migrations/0001_initial.py:24:0: C0301: Line too long (198/100) (line-too-long)
+migrations/0001_initial.py:25:0: C0301: Line too long (101/100) (line-too-long)
+migrations/0001_initial.py:26:0: C0301: Line too long (132/100) (line-too-long)
+migrations/0001_initial.py:28:0: C0301: Line too long (102/100) (line-too-long)
+migrations/0001_initial.py:29:0: C0301: Line too long (108/100) (line-too-long)
+migrations/0001_initial.py:1:0: C0103: Module name "0001_initial" doesn't conform to snake_case naming style (invalid-name)
+migrations/0001_initial.py:1:0: C0111: Missing module docstring (missing-docstring)
+migrations/0001_initial.py:7:0: C0111: Missing class docstring (missing-docstring)
+
+------------------------------------------------------------------
+Your code has been rated at 6.60/10 (previous run: 6.60/10, +0.00)
+
+************* Module validate.apps
+/home/kain/Git/my_project/mysite/validate/apps.py:1:0: C0111: Missing module docstring (missing-docstring)
+************* Module validate.views
+/home/kain/Git/my_project/mysite/validate/views.py:1:0: C0111: Missing module docstring (missing-docstring)
+/home/kain/Git/my_project/mysite/validate/views.py:6:0: C0111: Missing function docstring (missing-docstring)
+/home/kain/Git/my_project/mysite/validate/views.py:7:4: R1710: Either all return statements in a function should return an expression, or none of them should. (inconsistent-return-statements)
+/home/kain/Git/my_project/mysite/validate/views.py:6:0: R1710: Either all return statements in a function should return an expression, or none of them should. (inconsistent-return-statements)
+/home/kain/Git/my_project/mysite/validate/views.py:28:0: C0111: Missing function docstring (missing-docstring)
+/home/kain/Git/my_project/mysite/validate/views.py:28:0: R1710: Either all return statements in a function should return an expression, or none of them should. (inconsistent-return-statements)
+/home/kain/Git/my_project/mysite/validate/views.py:3:0: C0411: standard import "import re" should be placed before "from django.http import JsonResponse" (wrong-import-order)
+************* Module validate.urls
+/home/kain/Git/my_project/mysite/validate/urls.py:1:0: C0111: Missing module docstring (missing-docstring)
+/home/kain/Git/my_project/mysite/validate/urls.py:4:0: C0103: Constant name "app_name" doesn't conform to UPPER_CASE naming style (invalid-name)
+/home/kain/Git/my_project/mysite/validate/urls.py:6:0: C0103: Constant name "urlpatterns" doesn't conform to UPPER_CASE naming style (invalid-name)
+
+------------------------------------------------------------------
+Your code has been rated at 7.03/10 (previous run: 7.03/10, +0.00)
+
+************* Module mysite.wsgi
+/home/kain/Git/my_project/mysite/mysite/wsgi.py:16:0: C0103: Constant name "application" doesn't conform to UPPER_CASE naming style (invalid-name)
+************* Module mysite.urls
+/home/kain/Git/my_project/mysite/mysite/urls.py:19:0: C0103: Constant name "urlpatterns" doesn't conform to UPPER_CASE naming style (invalid-name)
+
+------------------------------------------------------------------
+Your code has been rated at 9.31/10 (previous run: 9.31/10, +0.00)
+
