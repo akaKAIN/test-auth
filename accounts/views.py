@@ -5,7 +5,6 @@ from django.contrib.messages.views import SuccessMessageMixin
 
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, FormView, CreateView
-
 from accounts.forms import UserCreateForm, MessageForm
 from accounts.models import Message
 
@@ -14,8 +13,6 @@ class AbstractMessage:
     """Акстрактный класс хранящий общие параметры для остальных вью с этой моделью"""
     model = Message
     login_url = 'accounts:login'
-    paginate_by = 20
-    # template_name = 'accounts/registrations.html'
 
 
 class MainView(LoginRequiredMixin, TemplateView):

@@ -25,6 +25,7 @@ class UserCreateForm(UserCreationForm):
 
 class MessageForm(forms.ModelForm):
     """Класс-форма для модели Сообщений, отправляемым пользователем администратору"""
+
     class Meta:
         model = Message
         fields = ('mail_from', 'note')
@@ -37,7 +38,8 @@ class MessageForm(forms.ModelForm):
 
     @staticmethod
     def check_outside(email):
-        """Функиця поиска совпадений во внешнем источнике. Если есть совпадение - возвращает совпадение"""
+        """Функиця поиска совпадений во внешнем источнике. Если есть совпадение почты в удаленном массиве,
+        возвращает все данные о пользователе, чьи данные совпали"""
         url = 'http://jsonplaceholder.typicode.com/users'
         check_request = requests.get(url)
         users_list = json.loads(check_request.text)

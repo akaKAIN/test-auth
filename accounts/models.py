@@ -1,10 +1,10 @@
 from django.contrib.auth.models import User
-from django.core.mail import send_mail, EmailMessage
 from django.db import models
 
 
 class MainClass(models.Model):
     """Базовая модель, собержащая общие атрибуты и методы"""
+
     def delete(self, *args, **kwargs):
         self.is_active = False
         self.save()
@@ -23,12 +23,6 @@ class Message(MainClass):
     note = models.TextField(verbose_name='Текст сообщения')
     is_read = models.BooleanField(verbose_name='Прочитано', default=False, blank=True)
     mail_date = models.DateTimeField(verbose_name='Дата создания письма', auto_now_add=True)
-
-    # def clean_note(self):
-    #     data = self.note
-    #     print(data)
-    #     data += 'wadwdwadwa'
-    #     return data
 
     class Meta:
         verbose_name = 'Сообщение'
